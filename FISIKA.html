@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pengukuran Titik Fokus</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #4facfe, #00f2fe);
+      color: #333;
+    }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .experiment-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .experiment-box {
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      flex: 1 1 300px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #007bff;
+      text-align: center;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .controls label {
+      font-weight: bold;
+    }
+
+    input, select, button {
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #007bff;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    input:focus, select:focus, button:hover {
+      border-color: #0056b3;
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .output {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #e9f7fe;
+      border: 1px solid #b3e5fc;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TUGAS AKHIR FISIKA</h1>
+    <h1>Eksperimen: Pengukuran Titik Fokus</h1>
+  </header>
+  <main>
+    <div class="experiment-container">
+      <!-- Eksperimen 1 -->
+      <div class="experiment-box" id="exp1">
+        <h2>Eksperimen 1</h2>
+        <div class="controls">
+          <label>Jarak Benda (cm):</label>
+          <input type="number" id="jarakBenda-exp1" placeholder="Masukkan jarak benda" />
+          <label>Jarak Bayangan (cm):</label>
+          <input type="number" id="jarakBayangan-exp1" placeholder="Masukkan jarak bayangan" />
+          <label>Jenis Optik:</label>
+          <select id="jenisOptik-exp1">
+            <option value="Lensa Cembung">Lensa Cembung</option>
+            <option value="Lensa Cekung">Lensa Cekung</option>
+            <option value="Cermin Cekung">Cermin Cekung</option>
+            <option value="Cermin Cembung">Cermin Cembung</option>
+          </select>
+          <button onclick="hitungFokus('exp1')">Hitung Titik Fokus</button>
+          <div class="output" id="outputFokus-exp1">Titik Fokus: -</div>
+        </div>
+      </div>
+
+      <!-- Eksperimen 2 -->
+      <div class="experiment-box" id="exp2">
+        <h2>Eksperimen 2</h2>
+        <div class="controls">
+          <label>Jarak Benda (cm):</label>
+          <input type="number" id="jarakBenda-exp2" placeholder="Masukkan jarak benda" />
+          <label>Jarak Bayangan (cm):</label>
+          <input type="number" id="jarakBayangan-exp2" placeholder="Masukkan jarak bayangan" />
+          <label>Jenis Optik:</label>
+          <select id="jenisOptik-exp2">
+            <option value="Lensa Cembung">Lensa Cembung</option>
+            <option value="Lensa Cekung">Lensa Cekung</option>
+            <option value="Cermin Cekung">Cermin Cekung</option>
+            <option value="Cermin Cembung">Cermin Cembung</option>
+          </select>
+          <button onclick="hitungFokus('exp2')">Hitung Titik Fokus</button>
+          <div class="output" id="outputFokus-exp2">Titik Fokus: -</div>
+        </div>
+      </div>
+
+      <!-- Eksperimen 3 -->
+      <div class="experiment-box" id="exp3">
+        <h2>Eksperimen 3</h2>
+        <div class="controls">
+          <label>Jarak Benda (cm):</label>
+          <input type="number" id="jarakBenda-exp3" placeholder="Masukkan jarak benda" />
+          <label>Jarak Bayangan (cm):</label>
+          <input type="number" id="jarakBayangan-exp3" placeholder="Masukkan jarak bayangan" />
+          <label>Jenis Optik:</label>
+          <select id="jenisOptik-exp3">
+            <option value="Lensa Cembung">Lensa Cembung</option>
+            <option value="Lensa Cekung">Lensa Cekung</option>
+            <option value="Cermin Cekung">Cermin Cekung</option>
+            <option value="Cermin Cembung">Cermin Cembung</option>
+          </select>
+          <button onclick="hitungFokus('exp3')">Hitung Titik Fokus</button>
+          <div class="output" id="outputFokus-exp3">Titik Fokus: -</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function hitungFokus(id) {
+      const s = parseFloat(document.getElementById('jarakBenda-' + id).value);
+      const sPrima = parseFloat(document.getElementById('jarakBayangan-' + id).value);
+      const jenis = document.getElementById('jenisOptik-' + id).value;
+
+      if (isNaN(s) || isNaN(sPrima) || s <= 0 || sPrima <= 0) {
+        alert('Masukkan nilai yang valid untuk jarak benda dan bayangan!');
+        return;
+      }
+
+      const reciprocalF = (1 / s) + (1 / sPrima);
+      const fokus = 1 / reciprocalF;
+
+      document.getElementById('outputFokus-' + id).innerText = 
+        `Titik Fokus (${jenis}): ${fokus.toFixed(2)} cm`;
+    }
+  </script>
+</body>
+</html>
